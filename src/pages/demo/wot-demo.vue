@@ -130,7 +130,7 @@ const mealData = ref({
           name: '套餐一条目二',
           unit: '份',
           price: 10,
-          number: 1,
+          number: 2,
         },
       ],
     },
