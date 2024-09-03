@@ -9,7 +9,7 @@
 
 <template>
   <view class="">
-    <wd-button @click="toWotDemo">Wot Demo</wd-button>
+    <wd-button @click="toWotDemo">Wot Demo issue反馈</wd-button>
   </view>
 </template>
 
