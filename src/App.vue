@@ -14,6 +14,10 @@ onHide(() => {
 
 <style lang="scss">
 /* stylelint-disable selector-type-no-unknown */
+page,
+:root {
+  background: $uni-bg-color-grey;
+}
 button::after {
   border: none;
 }
