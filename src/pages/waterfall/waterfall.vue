@@ -2,6 +2,7 @@
 {
   layout: 'tabbar',
   style: {
+    navigationStyle: 'custom',
     navigationBarTitleText: '瀑布流',
   },
 }
