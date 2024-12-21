@@ -24,16 +24,16 @@
     "spacing": "3px",
     "list": [
       {
-        "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/homeHL.png",
-        "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
         "iconPath": "static/tabbar/personal.png",
         "selectedIconPath": "static/tabbar/personalHL.png",
         "pagePath": "pages/waterfall/waterfall",
         "text": "瀑布"
+      },
+      {
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/homeHL.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
       },
       {
         "iconPath": "static/tabbar/example.png",
@@ -45,11 +45,11 @@
   },
   "pages": [
     {
-      "path": "pages/index/index",
+      "path": "pages/waterfall/waterfall",
       "type": "home",
+      "layout": "tabbar",
       "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "首页"
+        "navigationBarTitleText": "瀑布流"
       }
     },
     {
@@ -60,19 +60,19 @@
       }
     },
     {
+      "path": "pages/index/index",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "首页"
+      }
+    },
+    {
       "path": "pages/test/test",
       "type": "page",
       "layout": "default",
       "style": {
         "navigationBarTitleText": "测试页面"
-      }
-    },
-    {
-      "path": "pages/waterfall/waterfall",
-      "type": "page",
-      "layout": "tabbar",
-      "style": {
-        "navigationBarTitleText": "瀑布流"
       }
     }
   ],
