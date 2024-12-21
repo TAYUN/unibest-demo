@@ -2,7 +2,7 @@
 <template>
   <view>
     <view
-      class="fixed top-0 p-4 text-16px font-700 text-red z-999 text-center bg-#fff w-full opacity-80"
+      class="fixed top-0 p-4 text-16px font-700 text-red z-999 text-left bg-#fff w-full opacity-80"
     >
       {{ columnHeights.odd <= columnHeights.even ? '放左边' : '放右边' }}
       <view class="mt-2">左边-{{ columnHeights.odd }}</view>
@@ -329,12 +329,6 @@ onMounted(async () => {
 
 // 滚动触底事件
 onReachBottom(() => {
-  // console.log(
-  //   'state-isLoading',
-  //   state.value,
-  //   isLoading.value,
-  //   state.value !== 'finished' && !isLoading.value,
-  // )
   if (state.value !== 'finished' && !isLoading.value && isLoadFinish.value) {
     loadData()
   }
