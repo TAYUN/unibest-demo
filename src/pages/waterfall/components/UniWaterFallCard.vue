@@ -6,13 +6,13 @@
         <image class="w-full" :src="data.image" mode="widthFix" @load="load" @error="imageError" />
       </view>
       <!-- body -->
-      <view>
+      <view class="p-2">
         <!-- 标题 -->
         <view class="mb-1 text-15px">{{ data.title }}</view>
         <!-- 价格 -->
         <view class="mb-1 flex items-end">
-          <view class="text-14px font-medium leading-17px text-price">￥</view>
-          <view class="ml--2px text-[18px] font-medium leading-18px text-price">
+          <view class="text-14px font-medium leading-17px text-red">￥</view>
+          <view class="ml--2px text-18px font-medium leading-18px text-red">
             {{ data.price }}
           </view>
 
