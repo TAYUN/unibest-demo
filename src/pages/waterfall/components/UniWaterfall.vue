@@ -13,6 +13,9 @@
       <view class="mt-2">
         是否可以加载-{{ state !== 'finished' && !isLoading && isLoadFinish }}
       </view>
+      <view class="mt-2">
+        自动加载-{{ isLoadFinish }}-{{ isReachBottom }}-{{ isLoadFinish && isReachBottom }}
+      </view>
     </view>
     <view class="flex" :style="{ paddingLeft: `${gapValue}px` }">
       <!-- 奇数栏 -->
@@ -114,12 +117,11 @@ const getData = async (): Promise<any[]> => {
     page: pageInfo.value.page,
     pageSize: pageInfo.value.pageSize,
   })
-
   // 如果返回的代码不是200，表示请求失败，直接返回空数组
   if (res.code !== 200) {
     return []
   }
-
+  isReachBottom.value = false // 将触底状态改为false
   // 格式化返回的数据，提取所需字段
   const dataList = res.data.items.map((item: any) => ({
     id: item.id,
@@ -150,7 +152,7 @@ const columnHeights = reactive({ odd: 0, even: 0 }) // 两列的当前高度
 const lastDis = computed(() => (columnHeights.odd <= columnHeights.even ? 0 : 1)) // 上一次分配的列
 const heightDiff = computed(() => Math.abs(columnHeights.odd - columnHeights.even)) // 高度差
 const heightThreshold = 220 // 高度差阈值
-const fixCount = ref(2) // 矫正项数 不宜太大也不能太小 根据项目卡片的高度决定 这里卡片高度差一般不会太大，123就合适
+const fixCount = ref(3) // 矫正项数 不宜太大也不能太小 根据项目卡片的高度决定 这里卡片高度差一般不会太大，123就合适
 
 // 用于查询左右列高度
 const selectors = ['.odd-column', '.even-column']
@@ -233,28 +235,38 @@ const onImageLoad = async (count: number): Promise<void> => {
     //   这里如果一直用动态分配也可以
     //   distMode.value = heightDiff.value > heightThreshold ? 'dynamic' : 'default'
     // }
-    await dynamicDistribute()
+    dynamicDistribute()
   }
 }
 const imgErrorCount = ref(0)
 /**
- * 图片加载失败的回调
- * @param idx - 图片在组件中的唯一标识
+ * 图片加载失败或超时的回调
+ * @param param - 包含图片标识和失败原因的对象
  */
-const onImageError = (idx: string): void => {
+const onImageError = async (param: { idx: string; reason: 'timeout' | 'error' }): Promise<void> => {
+  const { idx, reason } = param
   imgErrorCount.value++
-  imageLoadCount.value++ // 加载失败也算加载过了
-  // 解析 idx，获取列类型和索引
-  const [column, index] = idx.split('-')
-  console.log('idx', idx)
-
+  imageLoadCount.value++
+  console.log(`图片加载失败: ${idx}, 原因: ${reason}`)
   // 替换图片为占位图
   const placeholderImage = 'https://via.placeholder.com/150'
-
+  const [column, index] = idx.split('-')
   if (column === 'even') {
-    evenItems.value[index].image = placeholderImage // 更新右列图片
+    evenItems.value[Number(index)].image = placeholderImage
   } else if (column === 'odd') {
-    oddItems.value[index].image = placeholderImage // 更新左列图片
+    oddItems.value[Number(index)].image = placeholderImage
+  }
+  // 超时
+  if (reason === 'timeout') {
+    if (isLoadComplete.value) {
+      await updateHeights()
+      //  如果高度差较大，动态调整最后两项，否则延续之前的分配方式
+      // if (pendingItems.value.length >= fixCount.value) {
+      //   这里如果一直用动态分配也可以
+      //   distMode.value = heightDiff.value > heightThreshold ? 'dynamic' : 'default'
+      // }
+      dynamicDistribute()
+    }
   }
 }
 
@@ -308,8 +320,7 @@ const isLoading = ref(false)
  * 加载数据
  */
 const loadData = async (): Promise<void> => {
-  if (isLoading.value) return
-
+  if (isLoading.value || state.value === 'finished' || !isLoadFinish.value) return
   isLoading.value = true
   try {
     const newItems = await getData()
@@ -326,10 +337,15 @@ onMounted(async () => {
   await updateHeights()
   await loadData()
 })
-
+const isReachBottom = ref(false) // 触底状态
 // 滚动触底事件
 onReachBottom(() => {
-  if (state.value !== 'finished' && !isLoading.value && isLoadFinish.value) {
+  isReachBottom.value = true
+  // loadData()
+})
+// 监听触底状态、所有图片的加载状态
+watchEffect(() => {
+  if (isLoadFinish.value && isReachBottom.value) {
     loadData()
   }
 })

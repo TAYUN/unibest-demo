@@ -1,9 +1,15 @@
 <template>
   <view class="box-border bg-#fff rounded-2 overflow-hidden">
-    <view class="">
+    <view>
       <!-- 图片 -->
       <view class="mb-1">
-        <image class="w-full" :src="data.image" mode="widthFix" @load="load" @error="imageError" />
+        <image
+          class="w-full"
+          :src="data.image"
+          mode="widthFix"
+          @load="handleLoad"
+          @error="handleError"
+        />
       </view>
       <!-- body -->
       <view class="p-2">
@@ -20,8 +26,6 @@
             ￥{{ data.originalPrice }}
           </view>
         </view>
-        <!-- 标签 -->
-        <!-- <view></view> -->
         <!-- 商家 -->
         <view class="flex items-center min-w-0">
           <image
@@ -50,20 +54,80 @@ const props = defineProps({
   },
   idx: {
     type: String,
-    default: true,
+    required: true,
   },
 })
+
+// 超时时间：5秒
+const LOAD_TIMEOUT = 5000
+// 定时器引用
+let timeoutHandler: NodeJS.Timeout | null = null
+// 标记图片是否已处理
+let isHandled = false
+
 const emit = defineEmits(['onImageLoad', 'onImageError'])
-const load = () => {
-  // 加载完成返回1
-  emit('onImageLoad', 1)
+
+/**
+ * 图片加载完成
+ */
+const handleLoad = () => {
+  if (isHandled) return // 如果已处理过，则不再重复处理
+  isHandled = true
+
+  // 加载完成，清除超时定时器
+  if (timeoutHandler) {
+    clearTimeout(timeoutHandler)
+    timeoutHandler = null
+  }
+  emit('onImageLoad', 1) // 通知父组件加载成功
 }
-const imageError = () => {
-  // 加载失败返回一个标识
-  emit('onImageError', props.idx)
+
+/**
+ * 图片加载失败
+ */
+const handleError = () => {
+  if (isHandled) return // 如果已处理过，则不再重复处理
+  isHandled = true
+
+  // 加载失败，清除超时定时器
+  if (timeoutHandler) {
+    clearTimeout(timeoutHandler)
+    timeoutHandler = null
+  }
+  emit('onImageError', { idx: props.idx, reason: 'error' }) // 通知父组件加载失败
 }
+
+/**
+ * 图片加载超时的处理
+ */
+const onTimeout = () => {
+  if (isHandled) return // 如果已处理过，则不再重复处理
+  isHandled = true
+
+  emit('onImageError', { idx: props.idx, reason: 'timeout' }) // 通知父组件加载超时
+}
+
+/**
+ * 设置超时检测
+ */
+const setImageTimeout = () => {
+  timeoutHandler = setTimeout(() => {
+    onTimeout()
+  }, LOAD_TIMEOUT)
+}
+
+// 初始化超时检测
+onMounted(() => {
+  setImageTimeout()
+})
+
+// 清理超时定时器（组件销毁时）
+onUnmounted(() => {
+  if (timeoutHandler) {
+    clearTimeout(timeoutHandler)
+    timeoutHandler = null
+  }
+})
 </script>
 
-<style lang="scss" scoped>
-//
-</style>
+<style lang="scss" scoped></style>
