@@ -101,8 +101,10 @@ const handleError = () => {
  * 图片加载超时的处理
  */
 const onTimeout = () => {
+  console.log('timeout')
   if (isHandled) return // 如果已处理过，则不再重复处理
   isHandled = true
+  console.log('timeout- emit触发了')
 
   emit('onImageError', { idx: props.idx, reason: 'timeout' }) // 通知父组件加载超时
 }

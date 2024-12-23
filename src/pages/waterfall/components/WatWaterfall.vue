@@ -1,19 +1,19 @@
 <!-- 两栏布局瀑布流 -->
 <template>
   <view>
-    <view class="fixed top-20 p-4 text-16px font-700 text-red text-left bg-#fff w-full opacity-0">
+    <view
+      class="fixed top-20 p-4 text-16px font-700 text-red text-left bg-#fff w-full opacity-80 z-9999"
+    >
       {{ columnHeights.odd <= columnHeights.even ? '放左边' : '放右边' }}
       <view class="mt-2">左边-{{ columnHeights.odd }}</view>
       <view class="mt-2">右边-{{ columnHeights.even }}</view>
       <view class="mt-2">差值-{{ heightDiff }}</view>
-      <view class="mt-2">加载中图片-{{ totalImages - imageLoadCount }}</view>
       <view class="mt-2">错误图片-{{ imgErrorCount }}</view>
-      <view class="mt-2">
-        是否可以加载-{{ state !== 'finished' && !isLoading && isLoadFinish }}
-      </view>
-      <view class="mt-2">
-        自动加载-{{ isLoadFinish }}-{{ isReachBottom }}-{{ isLoadFinish && isReachBottom }}
-      </view>
+      <view class="mt-2">allImgCount-{{ allImgCount }}</view>
+      <view class="mt-2">loadedCount-{{ loadedCount }}</view>
+      <view class="mt-2">pendingItems-{{ pendingItems.length }}</view>
+      <view class="mt-2">加载中图片-{{ allImgCount - loadedCount }}</view>
+      <view class="mt-2">allImgFinish-{{ allImgFinish }}</view>
     </view>
     <view class="flex" :style="{ paddingLeft: `${gapValue}px`, paddingTop: `${gapValue}px` }">
       <!-- 奇数栏 -->
@@ -214,17 +214,53 @@ const updateHeights = async (): Promise<void> => {
 }
 
 // 图片加载状态
-const totalImages = ref(0) // 当前需要加载的图片总数
-const imageLoadCount = ref(0) // 当前已加载完成的图片数
+const allImgCount = ref(0)
+const loadedCount = ref(0)
+const allImgFinish = computed(() => loadedCount.value === allImgCount.value)
+const canDynamic = computed(
+  () => allImgCount.value - loadedCount.value === pendingItems.value.length,
+)
 const imgErrorCount = ref(0) // 加载失败或超时的图片数
-// 注意!!! 这里不用全等，是因为， 发现图片加载失败的时候，计算会有偏差导致imageLoadCount会大于totalImages，不知道为啥？浏览器重新加载了？
-const isLoadComplete = computed(() => imageLoadCount.value >= totalImages.value) // 判断是否图片加载完成默认分配的图片,
-const isLoadFinish = computed(() => isLoadComplete.value && pendingItems.value.length === 0) // 判断是否加载完成所有图片
 // 分配模式和待分配数据
 const pendingItems = ref<any[]>([]) // 等待动态调整的数据
 const distMode = ref<'default' | 'dynamic'>('dynamic') // 分配模式 dynamic动态、default默认
 const lastPush = ref<'odd' | 'even'>('odd') // 最近一次动态分配到的列
 
+/**
+ * 将新数据分配到两列
+ * @param newList - 待分配的数据数组
+ */
+const distributeItems = async (newList: any[]): Promise<void> => {
+  if (!newList.length) return // 数据为空时直接返回
+  allImgCount.value += newList.length
+  const adjNum = Math.min(fixCount.value, newList.length) // 计算需要矫正的项数
+
+  if (newList.length <= adjNum) {
+    // 数据量小于或等于矫正项数，全部加入待分配数组
+    pendingItems.value.push(...newList)
+    // 如果只有一条数据，直接触发分配逻辑
+    if (newList.length === 1) {
+      await dynamicDistribute()
+    }
+  } else {
+    // 分割数据，前部分直接默认分配分配，后部分留作矫正
+    const splitIndex = newList.length - adjNum
+
+    // 分配前部分数据到两列
+    newList.slice(0, splitIndex).forEach((item, index) => {
+      if (index % 2 === lastDis.value) {
+        oddItems.value.push(item) // 左列
+        lastPush.value = 'odd'
+      } else {
+        evenItems.value.push(item) // 右列
+        lastPush.value = 'even'
+      }
+    })
+
+    // 后部分数据加入待分配数组
+    pendingItems.value.push(...newList.slice(splitIndex))
+  }
+}
 /**
  * 动态分配待分配的数据到两列
  */
@@ -233,8 +269,6 @@ const dynamicDistribute = async (): Promise<void> => {
 
   if (distMode.value === 'dynamic') {
     // 动态分配模式：每次只分配一个数据
-    totalImages.value = 1
-    imageLoadCount.value = 0
     const item = pendingItems.value.shift() // 移除数组的第一个元素
     if (columnHeights.odd <= columnHeights.even) {
       oddItems.value.push(item)
@@ -245,8 +279,6 @@ const dynamicDistribute = async (): Promise<void> => {
     }
   } else {
     // 默认分配模式：一次性分配所有数据
-    totalImages.value = pendingItems.value.length
-    imageLoadCount.value = 0
     pendingItems.value.forEach((item) => {
       if (lastPush.value === 'even') {
         oddItems.value.push(item)
@@ -265,8 +297,8 @@ const dynamicDistribute = async (): Promise<void> => {
  * @param count - 当前加载完成的图片数量
  */
 const onImageLoad = async (count: number): Promise<void> => {
-  imageLoadCount.value += count
-  if (isLoadComplete.value && pendingItems.value.length !== 0) {
+  loadedCount.value++
+  if (canDynamic.value) {
     await updateHeights()
     //  如果高度差较大，动态调整最后两项，否则延续之前的分配方式
     // if (pendingItems.value.length >= fixCount.value) {
@@ -286,72 +318,33 @@ const onImageLoad = async (count: number): Promise<void> => {
 const onImageError = async (param: { idx: string; reason: 'timeout' | 'error' }): Promise<void> => {
   const { idx, reason } = param
   imgErrorCount.value++
-  imageLoadCount.value++
+  loadedCount.value++
   console.log(`图片加载失败: ${idx}, 原因: ${reason}`)
   // 替换图片为占位图
   const placeholderImage = 'https://dummyimage.com/240x240'
   const [column, index] = idx.split('-')
   if (column === 'even') {
-    console.log('执行了even')
     evenItems.value[Number(index)].thumb = placeholderImage
   } else if (column === 'odd') {
-    console.log('执行了odd')
     oddItems.value[Number(index)].thumb = placeholderImage
   }
+
+  if (canDynamic.value) {
+    await updateHeights()
+    //  如果高度差较大，动态调整最后两项，否则延续之前的分配方式
+    // if (pendingItems.value.length >= fixCount.value) {
+    //   这里如果一直用动态分配也可以
+    //   distMode.value = heightDiff.value > heightThreshold ? 'dynamic' : 'default'
+    // }
+    if (!domError.value) {
+      dynamicDistribute()
+    }
+  }
   // 超时
-  if (reason === 'timeout') {
-    if (isLoadComplete.value && pendingItems.value.length !== 0) {
-      await updateHeights()
-      //  如果高度差较大，动态调整最后两项，否则延续之前的分配方式
-      // if (pendingItems.value.length >= fixCount.value) {
-      //   这里如果一直用动态分配也可以
-      //   distMode.value = heightDiff.value > heightThreshold ? 'dynamic' : 'default'
-      // }
-      if (!domError.value) {
-        dynamicDistribute()
-      }
-    }
-  }
+  // if (reason === 'timeout') {
+  // }
 }
 
-/**
- * 将新数据分配到两列
- * @param newList - 待分配的数据数组
- */
-const distributeItems = async (newList: any[]): Promise<void> => {
-  if (!newList.length) return // 数据为空时直接返回
-  const adjNum = Math.min(fixCount.value, newList.length) // 计算需要矫正的项数
-
-  if (newList.length <= adjNum) {
-    // 数据量小于或等于矫正项数，全部加入待分配数组
-    totalImages.value = newList.length
-    imageLoadCount.value = 0
-    pendingItems.value.push(...newList)
-    // 如果只有一条数据，直接触发分配逻辑
-    if (newList.length === 1) {
-      await dynamicDistribute()
-    }
-  } else {
-    // 分割数据，前部分直接默认分配分配，后部分留作矫正
-    const splitIndex = newList.length - adjNum
-    totalImages.value = splitIndex
-    imageLoadCount.value = 0
-
-    // 分配前部分数据到两列
-    newList.slice(0, splitIndex).forEach((item, index) => {
-      if (index % 2 === lastDis.value) {
-        oddItems.value.push(item) // 左列
-        lastPush.value = 'odd'
-      } else {
-        evenItems.value.push(item) // 右列
-        lastPush.value = 'even'
-      }
-    })
-
-    // 后部分数据加入待分配数组
-    pendingItems.value.push(...newList.slice(splitIndex))
-  }
-}
 // 跳转卡片详情页面
 const toDetailPage = (id) => {
   uni.showToast({
@@ -363,7 +356,7 @@ const toDetailPage = (id) => {
 const isLoading = ref(false)
 // 加载数据
 const initData = async (): Promise<void> => {
-  if (isLoading.value || state.value === 'finished' || !isLoadFinish.value) return
+  if (isLoading.value || state.value === 'finished' || !allImgFinish.value) return
   isLoading.value = true
   try {
     const newItems = await getData()
@@ -406,7 +399,7 @@ onReachBottom(() => {
 
 // 监听触底状态、所有图片的加载状态
 watchEffect(() => {
-  if (isLoadFinish.value && isReachBottom.value) {
+  if (allImgFinish.value && isReachBottom.value) {
     initData()
   }
 })
