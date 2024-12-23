@@ -21,10 +21,10 @@ export function generateMockData({ page, pageSize }) {
     const item = {
       id: i + 1,
       title: `Item ${i + 1}`,
-      image: `https://picsum.photos/${width}/${height}?random=${Math.random().toFixed(2)}`,
+      thumb: `https://picsum.photos/${width}/${height}?random=${Math.random().toFixed(2)}`,
       price: (Math.random() * (100 - 10) + 10).toFixed(2),
       originalPrice: (Math.random() * (200 - 100) + 100).toFixed(2),
-      merchant: {
+      communityMerchant: {
         title: `Merchant ${Math.floor(Math.random() * 20) + 1}`,
         avatar: `https://picsum.photos/50/50?random=${Math.random().toFixed(2)}`,
       },

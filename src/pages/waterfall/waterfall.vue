@@ -10,12 +10,12 @@
 
 <template>
   <view class="">
-    <UniWaterfall />
+    <WatWaterfall />
   </view>
 </template>
 
 <script lang="ts" setup>
-import UniWaterfall from './components/UniWaterfall.vue'
+import WatWaterfall from './components/WatWaterfall.vue'
 
 //
 </script>

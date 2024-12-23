@@ -5,7 +5,7 @@
       <view class="mb-1">
         <image
           class="w-full"
-          :src="data.image"
+          :src="data.thumb"
           mode="widthFix"
           @load="handleLoad"
           @error="handleError"
@@ -30,11 +30,11 @@
         <view class="flex items-center min-w-0">
           <image
             class="flex-shrink-0 w-18px h-18px rounded-full"
-            :src="data.merchant.avatar"
+            :src="data.communityMerchant.avatar"
             mode="scaleToFill"
           />
           <text class="ml-1 text-13px text-#666 truncate ellipsis">
-            {{ data.merchant.title }}
+            {{ data.communityMerchant.title }}
           </text>
         </view>
       </view>
