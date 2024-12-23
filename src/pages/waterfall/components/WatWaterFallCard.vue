@@ -79,7 +79,7 @@ const handleLoad = () => {
     clearTimeout(timeoutHandler)
     timeoutHandler = null
   }
-  emit('onImageLoad', 1) // 通知父组件加载成功
+  emit('onImageLoad', 1) // 通知父组件加载成功 表示数量可有可无
 }
 
 /**
