@@ -10,13 +10,25 @@
 
 <template>
   <view class="">
-    <WatWaterfall />
+    <WatWaterfall :isOnShow="isOnShow" ref="waterfallRef" />
   </view>
 </template>
 
 <script lang="ts" setup>
 import WatWaterfall from './components/WatWaterfall.vue'
+const waterfallRef = ref(null)
+const isOnShow = ref(false)
+onShow(() => {
+  isOnShow.value = true
+})
+onHide(() => {
+  isOnShow.value = false
+})
 
+onPullDownRefresh(() => {
+  waterfallRef.value && waterfallRef.value.reloadData()
+  uni.stopPullDownRefresh()
+})
 //
 </script>
 

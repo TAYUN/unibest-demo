@@ -289,12 +289,14 @@ const onImageError = async (param: { idx: string; reason: 'timeout' | 'error' })
   imageLoadCount.value++
   console.log(`图片加载失败: ${idx}, 原因: ${reason}`)
   // 替换图片为占位图
-  const placeholderImage = 'https://via.placeholder.com/150'
+  const placeholderImage = 'https://dummyimage.com/240x240'
   const [column, index] = idx.split('-')
   if (column === 'even') {
-    evenItems.value[Number(index)].image = placeholderImage
+    console.log('执行了even')
+    evenItems.value[Number(index)].thumb = placeholderImage
   } else if (column === 'odd') {
-    oddItems.value[Number(index)].image = placeholderImage
+    console.log('执行了odd')
+    oddItems.value[Number(index)].thumb = placeholderImage
   }
   // 超时
   if (reason === 'timeout') {
@@ -352,8 +354,9 @@ const distributeItems = async (newList: any[]): Promise<void> => {
 }
 // 跳转卡片详情页面
 const toDetailPage = (id) => {
-  uni.navigateTo({
-    url: `/pages/meal/MealDetail?id=${id}`,
+  uni.showToast({
+    title: `跳转详情页${id}`,
+    icon: 'none',
   })
 }
 // 数据加载状态
