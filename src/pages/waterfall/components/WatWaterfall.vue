@@ -369,6 +369,8 @@ const initData = async (): Promise<void> => {
 }
 // 重置状态（不包括自维护状态）
 const resetState = () => {
+  allImgCount.value = 0
+  loadedCount.value = 0
   pendingItems.value = []
   oddItems.value = []
   evenItems.value = []
