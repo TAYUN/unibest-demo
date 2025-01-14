@@ -7,12 +7,14 @@ interface NavigateToOptions {
   url: "/pages/waterfall/waterfall" |
        "/pages/about/about" |
        "/pages/index/index" |
-       "/pages/test/test";
+       "/pages/test/test" |
+       "/pages/wot/wot" |
+       "/pages/wot/issue/wdDatetimePicker";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 
 interface SwitchTabOptions {
-  url: "/pages/waterfall/waterfall" | "/pages/index/index" | "/pages/about/about"
+  url: "/pages/wot/wot" | "/pages/waterfall/waterfall" | "/pages/index/index" | "/pages/about/about"
 }
 
 type ReLaunchOptions = NavigateToOptions | SwitchTabOptions;
