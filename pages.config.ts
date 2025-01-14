@@ -29,6 +29,12 @@ export default defineUniPages({
       {
         iconPath: 'static/tabbar/personal.png',
         selectedIconPath: 'static/tabbar/personalHL.png',
+        pagePath: 'pages/wot/wot',
+        text: 'wot-issue',
+      },
+      {
+        iconPath: 'static/tabbar/personal.png',
+        selectedIconPath: 'static/tabbar/personalHL.png',
         pagePath: 'pages/waterfall/waterfall',
         text: '瀑布',
       },

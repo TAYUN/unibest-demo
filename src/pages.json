@@ -26,6 +26,12 @@
       {
         "iconPath": "static/tabbar/personal.png",
         "selectedIconPath": "static/tabbar/personalHL.png",
+        "pagePath": "pages/wot/wot",
+        "text": "wot-issue"
+      },
+      {
+        "iconPath": "static/tabbar/personal.png",
+        "selectedIconPath": "static/tabbar/personalHL.png",
         "pagePath": "pages/waterfall/waterfall",
         "text": "瀑布"
       },
@@ -74,6 +80,22 @@
       "layout": "default",
       "style": {
         "navigationBarTitleText": "测试页面"
+      }
+    },
+    {
+      "path": "pages/wot/wot",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "wot-issue"
+      }
+    },
+    {
+      "path": "pages/wot/issue/wdDatetimePicker",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "wd-datetime-picker"
       }
     }
   ],
