@@ -51,6 +51,14 @@
   },
   "pages": [
     {
+      "path": "pages/wot/wot",
+      "type": "home",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "wot-issue"
+      }
+    },
+    {
       "path": "pages/waterfall/waterfall",
       "type": "home",
       "layout": "tabbar",
@@ -80,14 +88,6 @@
       "layout": "default",
       "style": {
         "navigationBarTitleText": "测试页面"
-      }
-    },
-    {
-      "path": "pages/wot/wot",
-      "type": "page",
-      "layout": "default",
-      "style": {
-        "navigationBarTitleText": "wot-issue"
       }
     },
     {
