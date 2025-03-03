@@ -14,7 +14,7 @@ interface NavigateToOptions {
 interface RedirectToOptions extends NavigateToOptions {}
 
 interface SwitchTabOptions {
-  url: "/pages/wot/wot" | "/pages/waterfall/waterfall" | "/pages/index/index" | "/pages/about/about"
+  url: "/pages/wot/wot" | "/pages/test/test" | "/pages/waterfall/waterfall" | "/pages/index/index" | "/pages/about/about"
 }
 
 type ReLaunchOptions = NavigateToOptions | SwitchTabOptions;
