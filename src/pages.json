@@ -24,6 +24,18 @@
     "spacing": "3px",
     "list": [
       {
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/homeHL.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "static/tabbar/personal.png",
+        "selectedIconPath": "static/tabbar/personalHL.png",
+        "pagePath": "pages/test/test",
+        "text": "测试"
+      },
+      {
         "iconPath": "static/tabbar/personal.png",
         "selectedIconPath": "static/tabbar/personalHL.png",
         "pagePath": "pages/wot/wot",
@@ -34,12 +46,6 @@
         "selectedIconPath": "static/tabbar/personalHL.png",
         "pagePath": "pages/waterfall/waterfall",
         "text": "瀑布"
-      },
-      {
-        "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/homeHL.png",
-        "pagePath": "pages/index/index",
-        "text": "首页"
       },
       {
         "iconPath": "static/tabbar/example.png",
@@ -88,6 +94,22 @@
       "layout": "default",
       "style": {
         "navigationBarTitleText": "测试页面"
+      }
+    },
+    {
+      "path": "pages/test/test2",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "测试页面2"
+      }
+    },
+    {
+      "path": "pages/wot/issue/borderNoShow",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "边框不显示"
       }
     },
     {

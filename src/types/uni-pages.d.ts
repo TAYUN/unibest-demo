@@ -9,12 +9,14 @@ interface NavigateToOptions {
        "/pages/about/about" |
        "/pages/index/index" |
        "/pages/test/test" |
+       "/pages/test/test2" |
+       "/pages/wot/issue/borderNoShow" |
        "/pages/wot/issue/wdDatetimePicker";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 
 interface SwitchTabOptions {
-  url: "/pages/wot/wot" | "/pages/waterfall/waterfall" | "/pages/index/index" | "/pages/about/about"
+  url: "/pages/index/index" | "/pages/test/test" | "/pages/wot/wot" | "/pages/waterfall/waterfall" | "/pages/about/about"
 }
 
 type ReLaunchOptions = NavigateToOptions | SwitchTabOptions;

@@ -27,6 +27,18 @@ export default defineUniPages({
     spacing: '3px',
     list: [
       {
+        iconPath: 'static/tabbar/home.png',
+        selectedIconPath: 'static/tabbar/homeHL.png',
+        pagePath: 'pages/index/index',
+        text: '首页',
+      },
+      {
+        iconPath: 'static/tabbar/personal.png',
+        selectedIconPath: 'static/tabbar/personalHL.png',
+        pagePath: 'pages/test/test',
+        text: '测试',
+      },
+      {
         iconPath: 'static/tabbar/personal.png',
         selectedIconPath: 'static/tabbar/personalHL.png',
         pagePath: 'pages/wot/wot',
@@ -37,12 +49,6 @@ export default defineUniPages({
         selectedIconPath: 'static/tabbar/personalHL.png',
         pagePath: 'pages/waterfall/waterfall',
         text: '瀑布',
-      },
-      {
-        iconPath: 'static/tabbar/home.png',
-        selectedIconPath: 'static/tabbar/homeHL.png',
-        pagePath: 'pages/index/index',
-        text: '首页',
       },
       {
         iconPath: 'static/tabbar/example.png',

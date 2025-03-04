@@ -9,16 +9,13 @@
 
 <template>
   <view class="">
-    <button @click="toDatePicker">wd-datetime-picker问题</button>
+    <button @click="navTo('/pages/wot/issue/wdDatetimePicker')">wd-datetime-picker问题</button>
+    <button @click="navTo('/pages/wot/issue/borderNoShow')">第一个cell border线不显示</button>
   </view>
 </template>
 
 <script lang="ts" setup>
-const toDatePicker = () => {
-  uni.navigateTo({
-    url: '/pages/wot/issue/wdDatetimePicker',
-  })
-}
+import { navTo } from '@/utils/util'
 </script>
 
 <style lang="scss" scoped>
