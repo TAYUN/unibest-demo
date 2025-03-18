@@ -4,7 +4,10 @@
     "navigationBarTitleText": "unibest",
     "navigationBarBackgroundColor": "#f8f8f8",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#FFFFFF"
+    "backgroundColor": "#FFFFFF",
+    "h5": {
+      "navigationStyle": "custom"
+    }
   },
   "easycom": {
     "autoscan": true,
@@ -32,7 +35,7 @@
       {
         "iconPath": "static/tabbar/personal.png",
         "selectedIconPath": "static/tabbar/personalHL.png",
-        "pagePath": "pages/test/test",
+        "pagePath": "pages/test/test2",
         "text": "测试"
       },
       {
@@ -107,7 +110,7 @@
       "type": "page",
       "layout": "default",
       "style": {
-        "navigationBarTitleText": "测试页面2"
+        "navigationBarTitleText": "canvas图片"
       }
     },
     {
@@ -124,6 +127,14 @@
       "layout": "default",
       "style": {
         "navigationBarTitleText": "wd-datetime-picker"
+      }
+    },
+    {
+      "path": "pages/wot/issue/wdTabsIssue",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "tabs吸顶"
       }
     }
   ],
