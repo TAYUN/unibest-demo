@@ -52,7 +52,11 @@ export default defineConfig({
    * 自定义快捷语句
    * @see https://github.com/unocss/unocss#shortcuts
    */
-  shortcuts: [['center', 'flex justify-center items-center']],
+  shortcuts: [
+    ['center', 'flex justify-center items-center'],
+    ['center-col', 'flex justify-center items-center flex-col'],
+    ['center-absolute', 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'],
+  ],
   transformers: [
     // 启用 @apply 功能
     transformerDirectives(),
