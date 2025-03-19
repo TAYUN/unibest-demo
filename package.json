@@ -102,6 +102,7 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-4020920240930001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4020920240930001",
     "dayjs": "1.11.10",
+    "echarts": "^5.6.0",
     "html2canvas": "^1.4.1",
     "pinia": "2.0.36",
     "pinia-plugin-persistedstate": "3.2.1",
