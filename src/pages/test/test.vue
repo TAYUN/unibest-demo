@@ -12,6 +12,8 @@
     <view>比对值：50</view>
     <wd-input v-model="inputVal" @blur="onBlur" @focus="onFocus"></wd-input>
     <wd-button @click="onClick">提交</wd-button>
+    <button @tap="toEcharts1">图表1</button>
+    <button @tap="toEcharts2">图表2</button>
   </view>
 </template>
 
@@ -85,6 +87,17 @@ const onClick = async () => {
   // } else {
   //   onSubmit()
   // }
+}
+
+const toEcharts1 = () => {
+  uni.navigateTo({
+    url: '/pages/echarts/echarts1',
+  })
+}
+const toEcharts2 = () => {
+  uni.navigateTo({
+    url: '/pages/echarts/echarts2',
+  })
 }
 </script>
 
