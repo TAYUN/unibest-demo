@@ -5,7 +5,7 @@
       <slot name="top"></slot>
     </view>
     <view
-      class="fixed top-20 p-4 text-16px font-700 text-red text-left bg-#fff w-full opacity-90 z-99"
+      class="fixed top-20 p-4 text-16px font-700 text-red text-left bg-#fff w-full opacity-99 z-99"
     >
       {{ columnHeights.odd <= columnHeights.even ? '放左边' : '放右边' }}
       <view class="mt-2">左边-{{ columnHeights.odd }}</view>
@@ -18,53 +18,39 @@
       <view class="mt-2">加载中图片-{{ allImgCount - loadedCount }}</view>
       <view class="mt-2">allImgFinish-{{ allImgFinish }}</view>
     </view>
+
     <view class="flex" :style="{ paddingLeft: `${gapValue}px`, paddingTop: `${gapValue}px` }">
-      <!-- 奇数栏 -->
-      <view>
+      <view v-for="(column, columnIndex) in columns" :key="columnIndex">
         <!-- 高度容器 -->
-        <view class="odd-column">
+        <view :class="column.class">
           <view
-            :style="{ marginRight: `${gapValue}px`, marginBottom: `${gapValue}px` }"
-            v-for="(item, index) in oddItems"
+            v-for="(item, index) in column.items"
             :key="index"
+            :style="{ marginRight: `${gapValue}px`, marginBottom: `${gapValue}px` }"
           >
             <view :style="{ width: `${width}px` }">
-              <component
+              <!-- <component
                 :is="cardTemplate"
                 :data="item"
-                :idx="`odd-${index}`"
+                :idx="`${column.prefix}-${index}`"
                 @onImageLoad="onImageLoad"
                 @onImageError="onImageError"
                 @tap="toDetailPage(item.id)"
-              ></component>
-            </view>
-          </view>
-        </view>
-      </view>
-      <!-- 偶数栏 -->
-      <view>
-        <!-- 高度容器 -->
-        <view class="even-column">
-          <view
-            :style="{ marginRight: `${gapValue}px`, marginBottom: `${gapValue}px` }"
-            v-for="(item, index) in evenItems"
-            :key="index"
-          >
-            <!-- 瀑布流卡片组件，换成自己的 idx用于图片加载失败处理-->
-            <view :style="{ width: `${width}px` }">
-              <component
-                :is="cardTemplate"
+              ></component> -->
+              <!-- 作用域插槽，暴露数据 -->
+              <slot
+                name="card"
                 :data="item"
-                :idx="`even-${index}`"
-                @onImageLoad="onImageLoad"
-                @onImageError="onImageError"
-                @tap="toDetailPage(item.id)"
-              ></component>
+                :idx="`${column.prefix}-${index}`"
+                :onImageLoad="onImageLoad"
+                :onImageError="onImageError"
+              ></slot>
             </view>
           </view>
         </view>
       </view>
     </view>
+
     <!-- 加载完成 -->
     <wd-loadmore v-if="state === 'finished' && hasItems" :state="state" />
     <!-- 没有数据的时候 显示内容 -->
@@ -90,6 +76,18 @@ const props = defineProps({
     type: Object,
   },
 })
+const columns = computed(() => [
+  {
+    class: 'odd-column',
+    items: oddItems.value,
+    prefix: 'odd',
+  },
+  {
+    class: 'even-column',
+    items: evenItems.value,
+    prefix: 'even',
+  },
+])
 // 数据列，用于存放左列和右列的内容
 const oddItems = ref<any[]>([]) // 左列数据
 const evenItems = ref<any[]>([]) // 右列数据

@@ -75,7 +75,7 @@ const handleLoad = () => {
     clearTimeout(timeoutHandler)
     timeoutHandler = null
   }
-  emit('onImageLoad', 1) // 通知父组件加载成功 表示数量可有可无
+  emit('onImageLoad') // 通知父组件加载成功 表示数量可有可无
 }
 
 /**
@@ -99,6 +99,11 @@ const handleError = () => {
 const onTimeout = () => {
   if (isHandled) return // 如果已处理过，则不再重复处理
   isHandled = true
+  // 清除超时定时器
+  if (timeoutHandler) {
+    clearTimeout(timeoutHandler)
+    timeoutHandler = null
+  }
   emit('onImageError', { idx: props.idx, reason: 'timeout' }) // 通知父组件加载超时
 }
 

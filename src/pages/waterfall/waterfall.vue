@@ -26,6 +26,14 @@
           </wd-tabs>
         </view>
       </template>
+      <template #card="{ data, idx, onImageLoad, onImageError }">
+        <WatWaterFallCard
+          :data="data"
+          :idx="idx"
+          @onImageLoad="onImageLoad"
+          @onImageError="onImageError"
+        />
+      </template>
     </WatWaterfall>
   </view>
 </template>
