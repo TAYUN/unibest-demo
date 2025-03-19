@@ -90,6 +90,22 @@
       }
     },
     {
+      "path": "pages/echarts/echarts1",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "ECharts"
+      }
+    },
+    {
+      "path": "pages/echarts/echarts2",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "柱状图"
+      }
+    },
+    {
       "path": "pages/index/index",
       "type": "page",
       "style": {
