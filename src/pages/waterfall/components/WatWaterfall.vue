@@ -1,8 +1,11 @@
 <!-- 两栏布局瀑布流 -->
 <template>
   <view>
+    <view class="tabs-sticky" v-if="$slots.top">
+      <slot name="top"></slot>
+    </view>
     <view
-      class="fixed top-20 p-4 text-16px font-700 text-red text-left bg-#fff w-full opacity-80 z-9999"
+      class="fixed top-20 p-4 text-16px font-700 text-red text-left bg-#fff w-full opacity-90 z-99"
     >
       {{ columnHeights.odd <= columnHeights.even ? '放左边' : '放右边' }}
       <view class="mt-2">左边-{{ columnHeights.odd }}</view>
@@ -25,16 +28,16 @@
             v-for="(item, index) in oddItems"
             :key="index"
           >
-            <!-- 瀑布流卡片组件，换成自己的 idx用于图片加载失败处理-->
-            <WatWaterFallCard
-              :style="{ width: `${width}px` }"
-              :data="item"
-              :width="width"
-              :idx="`odd-${index}`"
-              @onImageLoad="onImageLoad"
-              @onImageError="onImageError"
-              @tap="toDetailPage(item.id)"
-            ></WatWaterFallCard>
+            <view :style="{ width: `${width}px` }">
+              <component
+                :is="cardTemplate"
+                :data="item"
+                :idx="`odd-${index}`"
+                @onImageLoad="onImageLoad"
+                @onImageError="onImageError"
+                @tap="toDetailPage(item.id)"
+              ></component>
+            </view>
           </view>
         </view>
       </view>
@@ -48,37 +51,50 @@
             :key="index"
           >
             <!-- 瀑布流卡片组件，换成自己的 idx用于图片加载失败处理-->
-            <WatWaterFallCard
-              :style="{ width: `${width}px` }"
-              :data="item"
-              :width="width"
-              :idx="`even-${index}`"
-              @onImageLoad="onImageLoad"
-              @onImageError="onImageError"
-              @tap="toDetailPage(item.id)"
-            ></WatWaterFallCard>
+            <view :style="{ width: `${width}px` }">
+              <component
+                :is="cardTemplate"
+                :data="item"
+                :idx="`even-${index}`"
+                @onImageLoad="onImageLoad"
+                @onImageError="onImageError"
+                @tap="toDetailPage(item.id)"
+              ></component>
+            </view>
           </view>
         </view>
       </view>
     </view>
-    <view class="p-4 text-center">{{ state === 'finished' ? '加载完成' : '正在加载' }}</view>
+    <!-- 加载完成 -->
+    <wd-loadmore v-if="state === 'finished' && hasItems" :state="state" />
+    <!-- 没有数据的时候 显示内容 -->
+    <view class="mb-3" v-else-if="!hasItems">
+      <wd-status-tip image="content" :tip="state === 'loading' ? '正在加载' : '暂无内容'" />
+    </view>
+    <!-- 还有数据加载 显示加载中 -->
+    <wd-loadmore v-else :state="state" />
   </view>
 </template>
 
 <script lang="ts" setup>
 // 卡片组件
-import WatWaterFallCard from './WatWaterFallCard.vue'
-import { generateMockData } from './mockApi'
-// import { useAuthStore } from '@/store'
+// import WatWaterFallCard from './WatWaterFallCard.vue'
 const props = defineProps({
   isOnShow: Boolean,
+  queryList: {
+    required: true,
+    type: Function,
+  },
+  cardTemplate: {
+    required: true,
+    type: Object,
+  },
 })
-// const authStore = useAuthStore()
-// const curLoc = computed(() => authStore.authInfo.curLoc)
 // 数据列，用于存放左列和右列的内容
 const oddItems = ref<any[]>([]) // 左列数据
 const evenItems = ref<any[]>([]) // 右列数据
-
+// 计算是否有数据
+const hasItems = computed(() => oddItems.value.length > 0 || evenItems.value.length > 0)
 // 获取设备信息，计算卡片宽度
 const sysInfo = uni.getSystemInfoSync()
 const { windowWidth } = sysInfo
@@ -96,7 +112,7 @@ const parseGap = (gap: string | number): number => {
   return typeof gap === 'number' ? gap : 0
 }
 // 布局信息
-const gap = 10 // 卡片之间的间距，单位 px
+const gap = 8 // 卡片之间的间距，单位 px
 const gapValue = parseGap(gap) // 解析后的间距值
 const totalGap = 3 * gapValue // 左、中、右三部分的间距总和
 const width = (windowWidth - totalGap) / 2 // 每列卡片的宽度
@@ -108,56 +124,27 @@ const pageInfo = ref({
   pageSize: 10, // 每页显示的条数
   total: 0, // 数据总条数
 })
-// tabs信息
-const tabList = ref([])
-const tab = ref(0)
-const curTabId = ref(null)
-// const tabsData = ref({}) // 存储tabs数据(暂未使用)
 
 /**
  * 获取数据
  * @returns 格式化后的数据数组
  */
-const getData = async (): Promise<any[]> => {
-  // 调用模拟数据生成函数，获取指定页的数据
-  const res = await generateMockData({
-    page: pageInfo.value.page,
-    pageSize: pageInfo.value.pageSize,
-  })
-  // 如果返回的代码不是200，表示请求失败，直接返回空数组
-  if (res.code !== 200) {
+const getData = async () => {
+  if (!props.queryList) {
+    console.error('queryList 方法未提供')
     return []
   }
-  isReachBottom.value = false // 将触底状态改为false
-  const data = res.data.items
+  const result = await props.queryList(pageInfo.value.page, pageInfo.value.pageSize)
+  if (!result) {
+    return []
+  }
+  const { dataList, totalPage } = result
 
-  // const data = mockData.data.items
-  // 格式化返回的数据，提取所需字段
-  const dataList = data.map((item) => ({
-    id: item.id,
-    title: item.title,
-    thumb: item.thumb, // 不需要模板字符串
-    price: item.price, // 转换为两位小数
-    originalPrice: item.originalPrice, // 转换为两位小数
-    communityMerchant: {
-      title: item.communityMerchant.title, // 对应商户名称
-      avatar: item.communityMerchant.avatar, // 商户头像链接
-    },
-  }))
-
-  // 获取总页数
-  const totalPages = res.data.pageInfo.totalPages
-  // const totalPages = mockData.data.pageInfo.totalPages
-  // 更新分页信息，增加当前页码
-  if (pageInfo.value.page < totalPages) {
-    pageInfo.value.page++
-  } else {
-    // 如果当前页大于或等于总页数，更新状态为 'finished'
+  if (pageInfo.value.page > totalPage) {
     state.value = 'finished'
   }
-
-  // 随机打乱数据顺序（用于测试）
-  return dataList.sort(() => Math.random() - 0.5)
+  pageInfo.value.page++ // 更新页码
+  return dataList
 }
 
 // 记录左右列的高度
@@ -188,7 +175,15 @@ const getHeights = async (delay = 0): Promise<number[]> => {
             reject(new Error('未能获取到节点信息'))
             return
           }
-          const heights = rects.map((rect) => (rect ? rect.height : 0))
+          const heights = rects.map((rect) => {
+            if (!columnHeights.even && !columnHeights.odd && rects[0].height === 0) {
+              console.error('dom异常，停止分配')
+              domError.value = true
+            } else {
+              domError.value = false
+            }
+            return rect ? rect.height : 0
+          })
           resolve(heights) // 成功返回高度数组
         })
       } catch (error) {
@@ -204,9 +199,10 @@ const getHeights = async (delay = 0): Promise<number[]> => {
 const updateHeights = async (): Promise<void> => {
   try {
     const [oddHeight, evenHeight] = await getHeights() // 获取左右列高度
-    domError.value = false
-    columnHeights.odd = oddHeight
-    columnHeights.even = evenHeight
+    if (!domError.value) {
+      columnHeights.odd = oddHeight
+      columnHeights.even = evenHeight
+    }
   } catch (error) {
     domError.value = true
     console.error('获取瀑布高度失败:', error.message)
@@ -234,7 +230,6 @@ const distributeItems = async (newList: any[]): Promise<void> => {
   if (!newList.length) return // 数据为空时直接返回
   allImgCount.value += newList.length
   const adjNum = Math.min(fixCount.value, newList.length) // 计算需要矫正的项数
-
   if (newList.length <= adjNum) {
     // 数据量小于或等于矫正项数，全部加入待分配数组
     pendingItems.value.push(...newList)
@@ -245,7 +240,6 @@ const distributeItems = async (newList: any[]): Promise<void> => {
   } else {
     // 分割数据，前部分直接默认分配分配，后部分留作矫正
     const splitIndex = newList.length - adjNum
-
     // 分配前部分数据到两列
     newList.slice(0, splitIndex).forEach((item, index) => {
       if (index % 2 === lastDis.value) {
@@ -319,7 +313,7 @@ const onImageError = async (param: { idx: string; reason: 'timeout' | 'error' })
   const { idx, reason } = param
   imgErrorCount.value++
   loadedCount.value++
-  console.log(`图片加载失败: ${idx}, 原因: ${reason}`)
+  console.error(`图片加载失败: ${idx}, 原因: ${reason}`)
   // 替换图片为占位图
   const placeholderImage = 'https://dummyimage.com/240x240'
   const [column, index] = idx.split('-')
@@ -347,19 +341,19 @@ const onImageError = async (param: { idx: string; reason: 'timeout' | 'error' })
 
 // 跳转卡片详情页面
 const toDetailPage = (id) => {
-  uni.showToast({
-    title: `跳转详情页${id}`,
-    icon: 'none',
+  uni.navigateTo({
+    url: `/pages/meal/MealDetail?id=${id}`,
   })
 }
 // 数据加载状态
 const isLoading = ref(false)
 // 加载数据
-const initData = async (): Promise<void> => {
+const loadData = async (): Promise<void> => {
   if (isLoading.value || state.value === 'finished' || !allImgFinish.value) return
   isLoading.value = true
   try {
     const newItems = await getData()
+    isReachBottom.value = false // 将触底状态改为false
     await distributeItems(newItems)
   } catch (err) {
     console.error('加载数据失败：', err)
@@ -369,6 +363,8 @@ const initData = async (): Promise<void> => {
 }
 // 重置状态（不包括自维护状态）
 const resetState = () => {
+  columnHeights.odd = 0
+  columnHeights.even = 0
   allImgCount.value = 0
   loadedCount.value = 0
   pendingItems.value = []
@@ -385,11 +381,12 @@ const resetState = () => {
 // 刷新数据
 const reloadData = async () => {
   resetState()
-  await initData()
+  await loadData()
 }
 
 // 初始化加载
 onMounted(async () => {
+  // getMealSortData()
   reloadData()
 })
 
@@ -402,24 +399,16 @@ onReachBottom(() => {
 // 监听触底状态、所有图片的加载状态
 watchEffect(() => {
   if (allImgFinish.value && isReachBottom.value) {
-    initData()
+    loadData()
   }
 })
-
-// 位置更新重新获取数据
-// watch(
-//   curLoc,
-//   () => {
-//     reloadData()
-//   },
-//   { deep: true },
-// )
 
 // 如果获取dom节点信息有异常，就停止动态分配，等待下次页面的onShow再分配渲染
 watch(
   () => props.isOnShow,
   (newVal) => {
     if (newVal && domError.value) {
+      // console.log(' 继续分配')
       dynamicDistribute()
     }
   },
@@ -427,6 +416,7 @@ watch(
 // 提供给父级刷新用
 defineExpose({
   reloadData,
+  pageInfo,
 })
 </script>
 

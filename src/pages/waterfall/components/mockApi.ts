@@ -1,4 +1,4 @@
-export function generateMockData({ page, pageSize }) {
+export function generateMockData({ page, pageSize, tabId }) {
   // 模拟数据源
   const totalItems = Math.floor(Math.random() * 100) + 20 // 随机生成总项数，至少为 20
   const totalPages = Math.ceil(totalItems / pageSize) // 计算总页数
@@ -55,5 +55,22 @@ const res = generateMockData({
   page: pageInfo.value.page,
   pageSize: pageInfo.value.pageSize,
 })
+
+export const mockTabListApi = async () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        code: 200,
+        message: '成功',
+        data: [
+          { id: 1, title: '推荐' },
+          { id: 2, title: '热门' },
+          { id: 3, title: '最新' },
+          { id: 4, title: '折扣' },
+        ],
+      })
+    }, 500) // 模拟网络延迟
+  })
+}
 
 // console.log('mock数据：', JSON.stringify(res, null, 2))

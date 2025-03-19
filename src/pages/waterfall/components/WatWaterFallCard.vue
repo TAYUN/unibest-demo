@@ -1,5 +1,5 @@
 <template>
-  <view class="box-border bg-#fff rounded-2 overflow-hidden">
+  <view class="box-border bg-#fff rounded-2 overflow-hidden w-full">
     <view>
       <!-- 图片 -->
       <view class="mb-1">
@@ -47,10 +47,6 @@ const props = defineProps({
   data: {
     type: Object,
     required: true,
-  },
-  width: {
-    type: [Number, String],
-    default: 175,
   },
   idx: {
     type: String,
