@@ -7,6 +7,8 @@ interface NavigateToOptions {
   url: "/pages/wot/wot" |
        "/pages/waterfall/waterfall" |
        "/pages/about/about" |
+       "/pages/echarts/echarts1" |
+       "/pages/echarts/echarts2" |
        "/pages/index/index" |
        "/pages/test/test" |
        "/pages/test/test2" |
