@@ -12,7 +12,6 @@ interface NavigateToOptions {
        "/pages/index/index" |
        "/pages/test/test" |
        "/pages/test/test2" |
-       "/pages/test/test3" |
        "/pages/wot/issue/borderNoShow" |
        "/pages/wot/issue/wdDatetimePicker" |
        "/pages/wot/issue/wdTabsIssue";

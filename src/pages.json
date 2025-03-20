@@ -130,14 +130,6 @@
       }
     },
     {
-      "path": "pages/test/test3",
-      "type": "page",
-      "layout": "default",
-      "style": {
-        "navigationBarTitleText": "瀑布流"
-      }
-    },
-    {
       "path": "pages/wot/issue/borderNoShow",
       "type": "page",
       "layout": "default",
