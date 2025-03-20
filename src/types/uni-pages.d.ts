@@ -12,6 +12,7 @@ interface NavigateToOptions {
        "/pages/index/index" |
        "/pages/test/test" |
        "/pages/test/test2" |
+       "/pages/test/test3" |
        "/pages/wot/issue/borderNoShow" |
        "/pages/wot/issue/wdDatetimePicker" |
        "/pages/wot/issue/wdTabsIssue";
@@ -19,7 +20,7 @@ interface NavigateToOptions {
 interface RedirectToOptions extends NavigateToOptions {}
 
 interface SwitchTabOptions {
-  url: "/pages/index/index" | "/pages/test/test2" | "/pages/wot/wot" | "/pages/test/test" | "/pages/waterfall/waterfall" | "/pages/about/about"
+  url: "/pages/index/index" | "/pages/test/test3" | "/pages/wot/wot" | "/pages/test/test" | "/pages/waterfall/waterfall" | "/pages/about/about"
 }
 
 type ReLaunchOptions = NavigateToOptions | SwitchTabOptions;
