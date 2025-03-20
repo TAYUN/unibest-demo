@@ -1,0 +1,29 @@
+/* 主要 */
+.pure-switch-primary {
+    --pure-switch-active-background: var(--pure-theme-primary);
+    --pure-switch-loading-color: var(--pure-theme-primary);
+}
+
+/* 成功 */
+.pure-switch-success {
+    --pure-switch-active-background: var(--pure-theme-success);
+    --pure-switch-loading-color: var(--pure-theme-success);
+}
+
+/* 危险 */
+.pure-switch-danger {
+    --pure-switch-active-background: var(--pure-theme-danger);
+    --pure-switch-loading-color: var(--pure-theme-danger);
+}
+
+/* 警告 */
+.pure-switch-warning {
+    --pure-switch-active-background: var(--pure-theme-warning);
+    --pure-switch-loading-color: var(--pure-theme-warning);
+}
+
+/* 信息 */
+.pure-switch-info {
+    --pure-switch-active-background: var(--pure-theme-info);
+    --pure-switch-loading-color: var(--pure-theme-info);
+}

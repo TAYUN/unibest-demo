@@ -1,0 +1,79 @@
+/* 主要按钮 */
+.pure-button-primary {
+    --pure-button-theme: var(--pure-theme-primary);
+    --pure-button-color: #ffffff;
+}
+
+/* 成功按钮 */
+.pure-button-success {
+    --pure-button-theme: var(--pure-theme-success);
+    --pure-button-color: #ffffff;
+}
+
+/* 危险按钮 */
+.pure-button-danger {
+    --pure-button-theme: var(--pure-theme-danger);
+    --pure-button-color: #ffffff;
+}
+
+/* 警告按钮 */
+.pure-button-warning {
+    --pure-button-theme: var(--pure-theme-warning);
+    --pure-button-color: #ffffff;
+}
+
+/* 信息按钮 */
+.pure-button-info {
+    --pure-button-theme: var(--pure-theme-info);
+    --pure-button-color: #ffffff;
+}
+
+/* 块级按钮 */
+.pure-button-block {
+    --pure-button-display: flex;
+    width: 100%;
+}
+
+/* 圆角按钮 */
+.pure-button-round {
+    --pure-button-border-radius: 1000px;
+}
+
+/* 方形按钮 */
+.pure-button-square {
+    --pure-button-border-radius: 0px;
+}
+
+/* 朴素按钮 */
+.pure-button-plain {
+    --pure-button-background: var(--pure-background-element);
+    --pure-button-color: var(--pure-button-theme);
+}
+
+/* 浅化背景 */
+.pure-button-light {
+    --pure-button-background-opacity: var(--pure-opacity-light-background);
+    --pure-button-color: var(--pure-button-theme);
+}
+
+/* 反转按钮 */
+.pure-button-reversal {
+    --pure-button-flex-direction: row-reverse;
+    --pure-button-content-flex-direction: row-reverse;
+}
+
+/* 链接按钮 */
+.pure-button-link {
+    --pure-button-background: transparent;
+    --pure-button-color: var(--pure-button-theme);
+    --pure-button-height: auto;
+    --pure-button-padding: 0;
+    --pure-button-border-width: 0;
+    --pure-button-border-radius: 0;
+    --pure-button-line-height: none;
+}
+
+/* 下划线按钮 */
+.pure-button-underline {
+    --pure-button-text-decoration: underline;
+}

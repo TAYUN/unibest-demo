@@ -1,0 +1,33 @@
+page {
+    /* 主题色 */
+    --pure-theme-primary: #1989fa;
+    --pure-theme-success: #07c160;
+    --pure-theme-danger: #ee0a24;
+    --pure-theme-warning: #ff976a;
+    --pure-theme-info: #909399;
+
+    /* 组件默认背景色 */
+    --pure-background-element: #ffffff;
+    /* 遮罩默认背景色 */
+    --pure-background-mask: rgba(0, 0, 0, 0.6);
+
+    /* 边框 */
+    --pure-border-color-default: #f5f6f7;
+
+    /* 文本 */
+    --pure-font-size-default: 1em;
+    --pure-font-size-smaller: 0.75em;
+    --pure-font-size-larger: 1.25em;
+
+    /* Opacity */
+    --pure-opacity-hover: 0.75;
+    --pure-opacity-disabled: 0.5;
+    --pure-opacity-light-text: 0.75;
+    --pure-opacity-lighter-text: 0.5;
+    --pure-opacity-light-background: 0.25;
+
+    /* 层级 */
+    --pure-z-index-upper: 900;
+    --pure-z-index-middle: 500;
+    --pure-z-index-lower: 100;
+}

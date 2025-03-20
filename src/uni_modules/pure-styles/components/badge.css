@@ -1,0 +1,41 @@
+/* 主要 */
+.pure-badge-primary {
+    --pure-badge-theme: var(--pure-theme-primary);
+    --pure-badge-color: #ffffff;
+}
+
+/* 成功 */
+.pure-badge-success {
+    --pure-badge-theme: var(--pure-theme-success);
+    --pure-badge-color: #ffffff;
+}
+
+/* 危险 */
+.pure-badge-danger {
+    --pure-badge-theme: var(--pure-theme-danger);
+    --pure-badge-color: #ffffff;
+}
+
+/* 警告 */
+.pure-badge-warning {
+    --pure-badge-theme: var(--pure-theme-warning);
+    --pure-badge-color: #ffffff;
+}
+
+/* 信息 */
+.pure-badge-info {
+    --pure-badge-theme: var(--pure-theme-info);
+    --pure-badge-color: #ffffff;
+}
+
+/* 浅化背景 */
+.pure-badge-light {
+    --pure-badge-background-opacity: var(--pure-opacity-light-background);
+    --pure-badge-color: var(--pure-badge-theme);
+}
+
+/* 边框 */
+.pure-badge-border {
+    --pure-badge-border-width: 1px;
+    --pure-badge-border-color: var(--pure-badge-theme, var(--pure-border-color-default));
+}

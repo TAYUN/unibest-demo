@@ -1,0 +1,53 @@
+/* 主题-主要 */
+.pure-radio-primary {
+    --pure-radio-theme: var(--pure-theme-primary);
+}
+
+/* 主题-成功 */
+.pure-radio-success {
+    --pure-radio-theme: var(--pure-theme-success);
+}
+
+/* 主题-危险 */
+.pure-radio-danger {
+    --pure-radio-theme: var(--pure-theme-danger);
+}
+
+/* 主题-警告 */
+.pure-radio-warning {
+    --pure-radio-theme: var(--pure-theme-warning);
+}
+
+/* 主题-信息 */
+.pure-radio-info {
+    --pure-radio-theme: var(--pure-theme-info);
+}
+
+/* 方形 */
+.pure-radio-square {
+    --pure-radio-box-border-radius: 4px;
+}
+
+/* 浅化背景 */
+.pure-radio-light {
+    --pure-radio-box-background-opacity: var(--pure-opacity-light-background);
+    --pure-radio-icon-color: var(--pure-radio-theme);
+}
+
+/* 反转 */
+.pure-radio-reversal {
+    --pure-radio-flex-direction: row-reverse;
+
+}
+
+/* 块级 */
+.pure-radio-block {
+    --pure-radio-display: flex;
+    --pure-radio-width: 100%;
+    width: 100%;
+}
+
+/* 无边框 */
+.pure-radio-border-none {
+    --pure-radio-box-border-width: 0;
+}
