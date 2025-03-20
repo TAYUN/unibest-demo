@@ -15,8 +15,8 @@ export function generateMockData({ page, pageSize, tabId }) {
   const dataList = []
   for (let i = startIdx; i < endIdx && i < totalItems; i++) {
     // 随机生成不同的宽度和高度
-    const width = Math.floor(Math.random() * (300 - 100) + 100) // 随机宽度 100 到 300
-    const height = Math.floor(Math.random() * (300 - 100) + 100) // 随机高度 100 到 300
+    const width = Math.floor(Math.random() * (200 - 100) + 100) // 随机宽度 100 到 300
+    const height = Math.floor(Math.random() * (250 - 100) + 100) // 随机高度 100 到 300
 
     const item = {
       id: i + 1,
