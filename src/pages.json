@@ -35,18 +35,6 @@
       {
         "iconPath": "static/tabbar/personal.png",
         "selectedIconPath": "static/tabbar/personalHL.png",
-        "pagePath": "pages/test/test3",
-        "text": "测试"
-      },
-      {
-        "iconPath": "static/tabbar/personal.png",
-        "selectedIconPath": "static/tabbar/personalHL.png",
-        "pagePath": "pages/test/test4",
-        "text": "test"
-      },
-      {
-        "iconPath": "static/tabbar/personal.png",
-        "selectedIconPath": "static/tabbar/personalHL.png",
         "pagePath": "pages/wot/wot",
         "text": "wot-issue"
       },
@@ -54,13 +42,13 @@
         "iconPath": "static/tabbar/personal.png",
         "selectedIconPath": "static/tabbar/personalHL.png",
         "pagePath": "pages/test/test",
-        "text": "wot-issue"
+        "text": "mytest"
       },
       {
         "iconPath": "static/tabbar/personal.png",
         "selectedIconPath": "static/tabbar/personalHL.png",
         "pagePath": "pages/waterfall/waterfall",
-        "text": "瀑布"
+        "text": "瀑布2"
       },
       {
         "iconPath": "static/tabbar/example.png",
@@ -89,6 +77,14 @@
       }
     },
     {
+      "path": "pages/index/index",
+      "type": "home",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "瀑布2"
+      }
+    },
+    {
       "path": "pages/about/about",
       "type": "page",
       "style": {
@@ -112,14 +108,6 @@
       }
     },
     {
-      "path": "pages/index/index",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "首页"
-      }
-    },
-    {
       "path": "pages/test/test",
       "type": "page",
       "layout": "default",
@@ -133,14 +121,6 @@
       "layout": "default",
       "style": {
         "navigationBarTitleText": "canvas图片"
-      }
-    },
-    {
-      "path": "pages/test/test4",
-      "type": "page",
-      "layout": "default",
-      "style": {
-        "navigationBarTitleText": "瀑布2"
       }
     },
     {

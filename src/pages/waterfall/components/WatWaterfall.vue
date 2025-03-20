@@ -29,14 +29,6 @@
             :style="{ marginRight: `${gapValue}px`, marginBottom: `${gapValue}px` }"
           >
             <view :style="{ width: `${width}px` }">
-              <!-- <component
-                :is="cardTemplate"
-                :data="item"
-                :idx="`${column.prefix}-${index}`"
-                @onImageLoad="onImageLoad"
-                @onImageError="onImageError"
-                @tap="toDetailPage(item.id)"
-              ></component> -->
               <!-- 作用域插槽，暴露数据 -->
               <slot
                 name="card"
