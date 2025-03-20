@@ -1,0 +1,53 @@
+/* 主题-主要 */
+.pure-checkbox-primary {
+    --pure-checkbox-theme: var(--pure-theme-primary);
+}
+
+/* 主题-成功 */
+.pure-checkbox-success {
+    --pure-checkbox-theme: var(--pure-theme-success);
+}
+
+/* 主题-危险 */
+.pure-checkbox-danger {
+    --pure-checkbox-theme: var(--pure-theme-danger);
+}
+
+/* 主题-警告 */
+.pure-checkbox-warning {
+    --pure-checkbox-theme: var(--pure-theme-warning);
+}
+
+/* 主题-信息 */
+.pure-checkbox-info {
+    --pure-checkbox-theme: var(--pure-theme-info);
+}
+
+/* 圆形 */
+.pure-checkbox-circle {
+    --pure-checkbox-box-border-radius: 50%;
+}
+
+/* 浅化背景 */
+.pure-checkbox-light {
+    --pure-checkbox-box-background-opacity: var(--pure-opacity-light-background);
+    --pure-checkbox-icon-color: var(--pure-checkbox-theme);
+}
+
+/* 反转 */
+.pure-checkbox-reversal {
+    --pure-checkbox-flex-direction: row-reverse;
+
+}
+
+/* 块级 */
+.pure-checkbox-block {
+    --pure-checkbox-display: flex;
+    --pure-checkbox-width: 100%;
+    width: 100%;
+}
+
+/* 无边框 */
+.pure-checkbox-border-none {
+    --pure-checkbox-box-border-width: 0;
+}

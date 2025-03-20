@@ -1,0 +1,53 @@
+/* 内容 - 左上 */
+.pure-overlay-left-top {
+    --pure-overlay-align-items: flex-start;
+    --pure-overlay-justify-content: flex-start;
+}
+
+/* 内容 - 左中 */
+.pure-overlay-left-center {
+    --pure-overlay-align-items: flex-start;
+    --pure-overlay-justify-content: center;
+}
+
+/* 内容 - 左下 */
+.pure-overlay-left-bottom {
+    --pure-overlay-align-items: flex-start;
+    --pure-overlay-justify-content: flex-end;
+}
+
+/* 内容 - 中上 */
+.pure-overlay-center-top {
+    --pure-overlay-align-items: center;
+    --pure-overlay-justify-content: flex-start;
+}
+
+/* 内容 - 中中 */
+.pure-overlay-center-center {
+    --pure-overlay-align-items: center;
+    --pure-overlay-justify-content: center;
+}
+
+/* 内容 - 中下 */
+.pure-overlay-center-bottom {
+    --pure-overlay-align-items: center;
+    --pure-overlay-justify-content: flex-end;
+}
+
+/* 内容 - 右上 */
+.pure-overlay-right-top {
+    --pure-overlay-align-items: flex-end;
+    --pure-overlay-justify-content: flex-start;
+}
+
+/* 内容 - 右中 */
+.pure-overlay-right-center {
+    --pure-overlay-align-items: flex-end;
+    --pure-overlay-justify-content: center;
+}
+
+/* 内容 - 右下 */
+.pure-overlay-right-bottom {
+    --pure-overlay-align-items: flex-end;
+    --pure-overlay-justify-content: flex-end;
+}

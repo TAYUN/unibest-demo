@@ -1,0 +1,14 @@
+/* 等分布局 */
+.pure-tabs-equal {
+    --pure-tabs-item-flex-grow: 1;
+}
+
+/* 两端对齐 */
+.pure-tabs-justify {
+    --pure-tabs-justify-content: space-between;
+}
+
+/* 可以换行 */
+.pure-tabs-wrap {
+    --pure-tabs-flex-wrap: wrap;
+}

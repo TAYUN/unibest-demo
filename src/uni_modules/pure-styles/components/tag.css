@@ -1,0 +1,54 @@
+/* 主要 */
+.pure-tag-primary {
+    --pure-tag-theme: var(--pure-theme-primary);
+    --pure-tag-color: #ffffff;
+}
+
+/* 成功 */
+.pure-tag-success {
+    --pure-tag-theme: var(--pure-theme-success);
+    --pure-tag-color: #ffffff;
+}
+
+/* 危险 */
+.pure-tag-danger {
+    --pure-tag-theme: var(--pure-theme-danger);
+    --pure-tag-color: #ffffff;
+}
+
+/* 警告 */
+.pure-tag-warning {
+    --pure-tag-theme: var(--pure-theme-warning);
+    --pure-tag-color: #ffffff;
+}
+
+/* 信息 */
+.pure-tag-info {
+    --pure-tag-theme: var(--pure-theme-info);
+    --pure-tag-color: #ffffff;
+}
+
+/* 圆角 */
+.pure-tag-round {
+    --pure-tag-border-radius: 1000px;
+}
+
+/* 朴素 */
+.pure-tag-plain {
+    --pure-tag-background: var(--pure-background-element);
+    --pure-tag-color: var(--pure-tag-theme);
+    --pure-tag-border-width: 1px;
+    --pure-tag-border-color: var(--pure-tag-theme, currentColor);
+}
+
+/* 浅化背景 */
+.pure-tag-light {
+    --pure-tag-background-opacity: var(--pure-opacity-light-background);
+    --pure-tag-color: var(--pure-tag-theme);
+}
+
+/* 边框 */
+.pure-tag-border {
+    --pure-tag-border-width: 1px;
+    --pure-tag-border-color: var(--pure-tag-theme, currentColor);
+}

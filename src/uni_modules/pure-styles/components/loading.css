@@ -1,0 +1,5 @@
+/* 纵向布局 */
+.pure-loading-column {
+    --pure-loading-flex-direction: column;
+    text-align: center;
+}

@@ -1,0 +1,151 @@
+/* hover-class */
+.pure-hover {
+    opacity: var(--pure-opacity-hover);
+}
+
+/* 禁用状态 */
+.pure-disabled {
+    cursor: not-allowed;
+    opacity: var(--pure-opacity-disabled);
+    pointer-events: none;
+}
+
+/* #ifdef MP-QQ || MP-KUAISHOU */
+.pure-disabled image {
+    opacity: var(--pure-opacity-disabled);
+}
+
+/* #endif */
+
+/* 文字左对齐 */
+.pure-text-left {
+    text-align: left;
+}
+
+/* 文字右对齐 */
+.pure-text-right {
+    text-align: right;
+}
+
+/* 文字居中对齐 */
+.pure-text-center {
+    text-align: center;
+}
+
+/* 文字两端对齐 */
+.pure-text-justify {
+    text-align: justify;
+}
+
+/* 下划线 */
+.pure-underline {
+    text-decoration: underline;
+}
+
+/* 隐藏滚动条 */
+.pure-hide-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.pure-hide-scrollbar::-webkit-scrollbar-thumb {
+    width: 0;
+    height: 0;
+}
+
+/* 超出行数，自动显示行尾省略号，最多10行 */
+.pure-line-1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.pure-line-2 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.pure-line-3 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.pure-line-4 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.pure-line-5 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.pure-line-6 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.pure-line-7 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.pure-line-8 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.pure-line-9 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.pure-line-10 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}

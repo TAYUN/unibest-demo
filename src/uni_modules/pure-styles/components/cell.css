@@ -1,0 +1,9 @@
+/* 上边框单元格 */
+.pure-cell-border {
+    --pure-cell-border-top-width: 1px;
+}
+
+/* 单元格右侧箭头旋转90度 */
+.pure-cell-rotate {
+    --pure-cell-arrow-rotate: 90deg;
+}

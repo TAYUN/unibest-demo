@@ -1,0 +1,134 @@
+/* 左侧弹出 */
+.pure-popup-left {
+    --pure-popup-border-radius: 0 5px 5px 0;
+    --pure-popup-left: 0;
+    --pure-popup-top: 0;
+    --pure-popup-right: auto;
+    --pure-popup-bottom: auto;
+    --pure-popup-content-before-show-transform: translate(-100%, 0);
+    --pure-popup-content-to-show-transform: translate(0, 0);
+    --pure-popup-content-show-transform: translate(0, 0);
+    --pure-popup-content-before-hide-transform: translate(0, 0);
+    --pure-popup-content-to-hide-transform: translate(-100%, 0);
+    --pure-popup-content-hide-transform: translate(-100%, 0);
+    --pure-popup-width: 100%;
+    --pure-popup-max-width: 85%;
+    --pure-popup-height: 100%;
+    --pure-popup-max-height: 100%;
+}
+
+/* 右侧弹出 */
+.pure-popup-right {
+    --pure-popup-border-radius: 5px 0 0 5px;
+    --pure-popup-left: auto;
+    --pure-popup-top: 0;
+    --pure-popup-right: 0;
+    --pure-popup-bottom: auto;
+    --pure-popup-content-before-show-transform: translate(100%, 0);
+    --pure-popup-content-to-show-transform: translate(0, 0);
+    --pure-popup-content-show-transform: translate(0, 0);
+    --pure-popup-content-before-hide-transform: translate(0, 0);
+    --pure-popup-content-to-hide-transform: translate(100%, 0);
+    --pure-popup-content-hide-transform: translate(100%, 0);
+    --pure-popup-width: 100%;
+    --pure-popup-max-width: 85%;
+    --pure-popup-height: 100%;
+    --pure-popup-max-height: 100%;
+}
+
+/* 顶部弹出 */
+.pure-popup-top {
+    --pure-popup-border-radius: 0 0 5px 5px;
+    --pure-popup-left: 0;
+    --pure-popup-top: 0;
+    --pure-popup-right: auto;
+    --pure-popup-bottom: auto;
+    --pure-popup-content-before-show-transform: translate(0, -100%);
+    --pure-popup-content-to-show-transform: translate(0, 0);
+    --pure-popup-content-show-transform: translate(0, 0);
+    --pure-popup-content-before-hide-transform: translate(0, 0);
+    --pure-popup-content-to-hide-transform: translate(0, -100%);
+    --pure-popup-content-hide-transform: translate(0, -100%);
+    --pure-popup-width: 100%;
+    --pure-popup-max-width: 100%;
+    --pure-popup-height: 100%;
+    --pure-popup-max-height: 40%;
+}
+
+/* 底部弹出 */
+.pure-popup-bottom {
+    --pure-popup-border-radius: 5px 5px 0 0;
+    --pure-popup-left: 0;
+    --pure-popup-top: auto;
+    --pure-popup-right: auto;
+    --pure-popup-bottom: 0;
+    --pure-popup-content-before-show-transform: translate(0, 100%);
+    --pure-popup-content-to-show-transform: translate(0, 0);
+    --pure-popup-content-show-transform: translate(0, 0);
+    --pure-popup-content-before-hide-transform: translate(0, 0);
+    --pure-popup-content-to-hide-transform: translate(0, 100%);
+    --pure-popup-content-hide-transform: translate(0, 100%);
+    --pure-popup-width: 100%;
+    --pure-popup-max-width: 100%;
+    --pure-popup-height: 100%;
+    --pure-popup-max-height: 40%;
+}
+
+/* 居中弹出 */
+.pure-popup-center {
+    --pure-popup-border-radius: 5px;
+    --pure-popup-left: 50%;
+    --pure-popup-top: 50%;
+    --pure-popup-right: auto;
+    --pure-popup-bottom: auto;
+    --pure-popup-content-before-show-transform: translate(-50%, -50%) scale(0);
+    --pure-popup-content-to-show-transform: translate(-50%, -50%) scale(1.25);
+    --pure-popup-content-show-transform: translate(-50%, -50%) scale(1);
+    --pure-popup-content-before-hide-transform: translate(-50%, -50%) scale(1);
+    --pure-popup-content-to-hide-transform: translate(-50%, -50%) scale(1.25);
+    --pure-popup-content-hide-transform: translate(-50%, -50%) scale(0);
+    --pure-popup-width: 100%;
+    --pure-popup-max-width: 75%;
+    --pure-popup-height: auto;
+    --pure-popup-max-height: 40%;
+}
+
+/* 关闭按钮在左 */
+.pure-popup-close-left {
+    --pure-popup-close-left: 10px;
+    --pure-popup-close-top: 10px;
+    --pure-popup-close-right: auto;
+    --pure-popup-close-bottom: auto;
+}
+
+/* 关闭按钮在右 */
+.pure-popup-close-right {
+    --pure-popup-close-left: auto;
+    --pure-popup-close-top: 10px;
+    --pure-popup-close-right: 10px;
+    --pure-popup-close-bottom: auto;
+}
+
+/* 关闭按钮在下 */
+.pure-popup-close-bottom {
+    --pure-popup-close-left: 50%;
+    --pure-popup-close-top: auto;
+    --pure-popup-close-right: auto;
+    --pure-popup-close-bottom: -15px;
+    --pure-popup-close-transform: translate(-50%, 100%);
+    --pure-popup-close-background: var(--pure-background-element);
+    --pure-popup-close-border-radius: 50%;
+    --pure-popup-close-padding: 0.4em;
+}
+
+/* 关闭按钮在上 */
+.pure-popup-close-top {
+    --pure-popup-close-left: 50%;
+    --pure-popup-close-top: -15px;
+    --pure-popup-close-right: auto;
+    --pure-popup-close-bottom: auto;
+    --pure-popup-close-transform: translate(-50%, -100%);
+    --pure-popup-close-background: var(--pure-background-element);
+    --pure-popup-close-border-radius: 50%;
+    --pure-popup-close-padding: 0.4em;
+}

@@ -1,0 +1,12 @@
+.pure-waterfall {
+    --pure-waterfall-width: 100%;
+    --pure-waterfall-gap: 0px;
+    --pure-waterfall-height: 0px;
+    --pure-waterfall-columns: 2;
+    --pure-waterfall-column-width: calc((var(--pure-waterfall-width) - var(--pure-waterfall-gap) * (var(--pure-waterfall-columns) - 1)) / var(--pure-waterfall-columns));
+    position: relative;
+    background: var(--pure-waterfall-background, var(--pure-background-element));
+    transition-duration: var(--pure-waterfall-transition-duration, 50ms);
+    width: var(--pure-waterfall-width);
+    height: var(--pure-waterfall-height, auto);
+}

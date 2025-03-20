@@ -1,0 +1,18 @@
+.pure-waterfall-item {
+    width: var(--pure-waterfall-column-width);
+    position: absolute;
+    top: var(--pure-waterfall-item-top);
+    left: var(--pure-waterfall-item-left);
+    z-index: 2;
+    transition-property: top, left, opacity;
+    transition-duration: var(--pure-waterfall-item-transition-duration, 0.5s);
+    opacity: 0;
+}
+
+.pure-waterfall-item-content {
+    padding-bottom: var(--pure-waterfall-gap);
+}
+
+.pure-waterfall-item-initialized {
+    opacity: 1;
+}
