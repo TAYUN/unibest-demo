@@ -25,7 +25,7 @@
           mode="widthFix"
           @load="handleLoad(item, index)"
         />
-        <view class="item-text">
+        <view class="item-text center">
           <text>第 {{ index + 1 }} 个元素</text>
         </view>
         <view class="item-delete" hover-class="pure-hover" @tap.stop="handleDelete(item, index)">
@@ -97,6 +97,17 @@ function handleLoad(item, index) {
   // 更新资源加载状态
   item.loaded = true
 }
+onReachBottom(() => {
+  // 追加数据到10条数据到list
+  // 追加10条数据到list
+  for (let i = 0; i < 10; i++) {
+    list.value.push({
+      id: Math.random().toString().slice(2, 6),
+      loaded: false,
+      img: imgs[i],
+    })
+  }
+})
 </script>
 
 <style lang="scss" scoped>
