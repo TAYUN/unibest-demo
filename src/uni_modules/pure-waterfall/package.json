@@ -1,7 +1,7 @@
 {
   "id": "pure-waterfall",
   "displayName": "pure-waterfall 瀑布流",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "瀑布流组件",
   "keywords": [
     "pure-ui",

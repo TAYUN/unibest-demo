@@ -16,7 +16,10 @@ import props from './props.js'
 export default {
   options: {
     // 将自定义节点设置成虚拟的
-    // #ifndef MP-TOUTIAO
+    // 头条、飞书：因为合并后丢失事件和 'provide/inject'
+    // 京东：因为合并后不能合并外层 'class'
+    // 百度：因为合并后会在控制台疯狂报警告
+    // #ifndef MP-TOUTIAO || MP-LARK || MP-JD || MP-BAIDU
     virtualHost: true,
     // #endif
 
@@ -40,6 +43,7 @@ export default {
       isInit: false, // 是否初始化
       querying: false, // 是否正在查询中
       next: null, // 用来存储最后一次查询函数
+      pageRoute: '', // 页面路径
     }
   },
   computed: {
@@ -116,6 +120,11 @@ export default {
     },
   },
   mounted() {
+    // 获取当前页面路径
+    const pages = getCurrentPages()
+    const currentPage = pages[pages.length - 1]
+    this.pageRoute = currentPage.route
+
     // 初始化ID
     this.id = `pure-waterfall-item_${this.randomString()}_${Date.now()}`
 
@@ -150,12 +159,44 @@ export default {
       await this.$nextTick()
       await this.sleep(this.delay)
 
+      // 对比一下路径是否一致，不一致就不查询了，节省一点性能
+      const pages = getCurrentPages()
+      const currentPage = pages[pages.length - 1]
+      if (currentPage?.route !== this.pageRoute) {
+        // 稍微等待一下，确保元素已经渲染完成
+        await this.$nextTick()
+        // 这里最好等待一秒，实际测试时，如果切换页面太快，在毫秒级别，可能会导致获取图片uniapp都还没布局好，导致高度不准确，虽然这是极极端情况
+        await this.sleep(1000)
+
+        // 更新查询状态
+        this.querying = false
+        this.getRect()
+        return
+      }
+
       // 查询
       uni
         .createSelectorQuery()
         .in(this)
         .select(`#${this.id}`)
         .boundingClientRect((rect) => {
+          // 极端情况下，页面刚出现就迅速切走，会导致获取不到正确的布局信息，应该是 uni.createSelectorQuery 内部的 bug
+          // 所以这里需要判断一下，如果获取到的布局信息是 0，就重新查询一次
+          // 在上方也判断是否回到当前页面了，节省一点性能
+          if (
+            rect?.top === 0 &&
+            rect?.left === 0 &&
+            rect?.right === 0 &&
+            rect?.bottom === 0 &&
+            rect?.width === 0 &&
+            rect?.height === 0
+          ) {
+            // 更新查询状态
+            this.querying = false
+            this.getRect()
+            return
+          }
+
           // 将数据添加到布局队列中
           if (rect) {
             this.addItem({
@@ -174,14 +215,11 @@ export default {
 
           // 如果有下一次查询
           if (this.next) {
-            // 执行下一次查询
-            let nextFn = this.next
-
             // 清空下一次查询
             this.next = null
 
             // 再查询
-            nextFn()
+            this.getRect()
           }
         })
         .exec()
@@ -195,7 +233,7 @@ export default {
     },
 
     // 同步延时
-    sleep(time = 50) {
+    sleep(time = 100) {
       return new Promise((resolve) => {
         let timer = setTimeout(() => {
           clearTimeout(timer)

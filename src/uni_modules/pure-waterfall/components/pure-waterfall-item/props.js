@@ -27,6 +27,6 @@ export default {
     // 如果图片资源较大，虽然图片 load 了，但是现实到页面上也会消耗时间，可能会造成不能正常获取到元素的高度，导致布局异常，此时，可适当调整增加此值
     delay: {
         type: Number,
-        default: 200,
+        default: 500,
     },
 };
