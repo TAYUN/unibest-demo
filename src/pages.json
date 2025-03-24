@@ -132,6 +132,14 @@
       }
     },
     {
+      "path": "pages/wot/issue/pickerViewIssue",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "pickerView滑动问题"
+      }
+    },
+    {
       "path": "pages/wot/issue/wdDatetimePicker",
       "type": "page",
       "layout": "default",

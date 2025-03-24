@@ -13,6 +13,7 @@ interface NavigateToOptions {
        "/pages/test/test" |
        "/pages/test/test2" |
        "/pages/wot/issue/borderNoShow" |
+       "/pages/wot/issue/pickerViewIssue" |
        "/pages/wot/issue/wdDatetimePicker" |
        "/pages/wot/issue/wdTabsIssue";
 }

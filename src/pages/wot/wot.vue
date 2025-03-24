@@ -12,6 +12,7 @@
     <button @click="navTo('/pages/wot/issue/wdDatetimePicker')">wd-datetime-picker问题</button>
     <button @click="navTo('/pages/wot/issue/borderNoShow')">第一个cell border线不显示</button>
     <button @click="navTo('/pages/wot/issue/wdTabsIssue')">wd-tabs吸顶问题</button>
+    <button @click="navTo('/pages/wot/issue/pickerViewIssue')">pickerView无法滚动</button>
   </view>
 </template>
 
