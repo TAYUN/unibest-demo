@@ -12,7 +12,9 @@ interface NavigateToOptions {
        "/pages/echarts/echarts2" |
        "/pages/test/test" |
        "/pages/test/test2" |
+       "/pages/test/zpaging-demo" |
        "/pages/wot/issue/borderNoShow" |
+       "/pages/wot/issue/formIssue" |
        "/pages/wot/issue/pickerViewIssue" |
        "/pages/wot/issue/wdDatetimePicker" |
        "/pages/wot/issue/wdTabsIssue";

@@ -124,11 +124,27 @@
       }
     },
     {
+      "path": "pages/test/zpaging-demo",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "zpaging内容器滚动失效demo"
+      }
+    },
+    {
       "path": "pages/wot/issue/borderNoShow",
       "type": "page",
       "layout": "default",
       "style": {
         "navigationBarTitleText": "边框不显示"
+      }
+    },
+    {
+      "path": "pages/wot/issue/formIssue",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "隐藏表单的校验问题"
       }
     },
     {
