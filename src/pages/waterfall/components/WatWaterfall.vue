@@ -5,6 +5,7 @@
       <slot name="top"></slot>
     </view>
     <view
+      v-if="0"
       class="fixed top-20 p-4 text-16px font-700 text-red text-left bg-#fff w-full opacity-60 z-99"
     >
       {{ columnHeights.odd <= columnHeights.even ? '放左边' : '放右边' }}
