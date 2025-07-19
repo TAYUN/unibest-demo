@@ -1,3 +1,26 @@
+// 图片列表
+export const imgs = [
+  'https://gips0.baidu.com/it/u=567323913,331130417&fm=3028&app=3028&f=JPEG&fmt=auto&q=100&size=f1000_1000',
+  'http://gips3.baidu.com/it/u=775223787,1959096310&fm=3028&app=3028&f=JPEG&fmt=auto?w=1440&h=2560',
+  'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028&app=3028&f=JPEG&fmt=auto?w=1280&h=960',
+  'http://gips3.baidu.com/it/u=100751361,1567855012&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280',
+  'https://gips3.baidu.com/it/u=3732737575,1337431568&fm=3028&app=3028&f=JPEG&fmt=auto&q=100&size=f1440_2560',
+  'http://gips0.baidu.com/it/u=3560029307,576412274&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280',
+  'http://gips3.baidu.com/it/u=3892227616,2240763844&fm=3028&app=3028&f=JPEG&fmt=auto?w=3200&h=3200',
+  'http://gips1.baidu.com/it/u=3885198370,1571719977&fm=3028&app=3028&f=JPEG&fmt=auto?w=2560&h=1920',
+  'http://gips0.baidu.com/it/u=3557606594,2640240494&fm=3028&app=3028&f=JPEG&fmt=auto?w=2048&h=2048',
+  'http://gips2.baidu.com/it/u=3589715542,620993072&fm=3028&app=3028&f=JPEG&fmt=auto?w=2048&h=2048',
+  'http://gips0.baidu.com/it/u=398917425,2942293409&fm=3028&app=3028&f=JPEG&fmt=auto?w=1920&h=2560',
+  'http://gips0.baidu.com/it/u=1370402140,2009956566&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280',
+  'http://gips2.baidu.com/it/u=3579059838,1031544773&fm=3028&app=3028&f=JPEG&fmt=auto?w=1280&h=720',
+  'http://gips3.baidu.com/it/u=1121275038,3924754772&fm=3028&app=3028&f=JPEG&fmt=auto?w=1920&h=2560',
+  'https://gips1.baidu.com/it/u=2622851591,902014643&fm=3028&app=3028&f=JPEG&fmt=auto&q=100&size=f600_800',
+  'http://gips2.baidu.com/it/u=658660608,3402622316&fm=3028&app=3028&f=JPEG&fmt=auto?w=1280&h=960',
+  'http://gips3.baidu.com/it/u=1821127123,1149655687&fm=3028&app=3028&f=JPEG&fmt=auto?w=720&h=1280',
+  'http://gips3.baidu.com/it/u=3557221034,1819987898&fm=3028&app=3028&f=JPEG&fmt=auto?w=1280&h=960',
+  'http://gips1.baidu.com/it/u=1647344915,1746921568&fm=3028&app=3028&f=JPEG&fmt=auto?w=720&h=1280',
+  'http://gips3.baidu.com/it/u=3419425165,837936650&fm=3028&app=3028&f=JPEG&fmt=auto?w=1024&h=1024',
+]
 export function generateMockData({ page, pageSize, tabId }) {
   // 模拟数据源
   const totalItems = Math.floor(Math.random() * 100) + 20 // 随机生成总项数，至少为 20
@@ -21,7 +44,7 @@ export function generateMockData({ page, pageSize, tabId }) {
     const item = {
       id: i + 1,
       title: `Item ${i + 1}`,
-      thumb: `https://picsum.photos/${width}/${height}?random=${Math.random().toFixed(2)}`,
+      thumb: imgs[i % imgs.length],
       price: (Math.random() * (100 - 10) + 10).toFixed(2),
       originalPrice: (Math.random() * (200 - 100) + 100).toFixed(2),
       communityMerchant: {
